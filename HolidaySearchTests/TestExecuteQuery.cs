@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System;
 using FluentAssertions;
-using System.Globalization;
+// using System.Globalization;
 using System.Linq;
 using OTBHolidaySearch1.HolidaySearchClasses;
 
@@ -22,7 +22,7 @@ namespace OTBHolidaySearch1.HolidaySearchTests
         }
 
         [Test]
-        public void TestInitialiseExecuteQuery()
+        public void TestInitialise()
         {
             Assert.Pass();
         }
