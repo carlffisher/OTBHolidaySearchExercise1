@@ -1,3 +1,4 @@
+
 using FluentAssertions;
 using Newtonsoft.Json;
 using OTBHolidaySearch1.Flights;
@@ -35,8 +36,12 @@ namespace OTBHolidaySearch1.HolidaySearchTests
         {
             // Read a single json record from json flights datafile ...
 
+            // Act ...
+
             var json = File.ReadAllText(filePathFlights);
 
+            // Assert ...
+            
             json.Should().NotBeNull();
             json.Should().BeOfType<string>();
             json.Length.Should().Be(158);
@@ -47,7 +52,11 @@ namespace OTBHolidaySearch1.HolidaySearchTests
         {
             // Read a single json record from json hotels datafile ...
 
+            // Act ...
+            
             var json = File.ReadAllText(filePathHotels);
+
+            // Assert ...
 
             json.Should().NotBeNull();
             json.Should().BeOfType<string>();
@@ -59,19 +68,29 @@ namespace OTBHolidaySearch1.HolidaySearchTests
         {
             // Read a single json record from flights datafile and deserialize. Test for expected contents ...
 
+            // Act ...
+            
             var json = File.ReadAllText(filePathFlights);
 
+            // Assert ...
+            
             json.Should().NotBeNull();
             json.Should().BeOfType<string>();
 
             // because deserializer has trouble parsing [ and ] in Json values ...
 
+            // Arrange ...
+            
             var newjson = json.Replace(" [", " ");
             var newjson2 = newjson.Replace("],", ",");
             Console.WriteLine("newjson {0}", newjson2);
 
+            // Act ...
+            
             var result = JsonConvert.DeserializeObject<List<Flight>>(newjson2);
 
+            // Assert ...
+            
             result.Should().NotBeNull();
             result.Should().BeOfType<List<Flight>>();
             result!.Count.Should().Be(1);
@@ -84,13 +103,14 @@ namespace OTBHolidaySearch1.HolidaySearchTests
                                     item.From,
                                     item.To,
                                     item.Price,
-                                    item.Departure_date);
+                                    item.Departure_Date);
+
                 item.Id.Should().Be(1);
                 item.Airline.Should().Be("First Class Air");
                 item.From.Should().Be("MAN");
                 item.To.Should().Be("TFS");
                 item.Price.Should().Be(470);
-                item.Departure_date.Should().Be("2023-07-01");
+                item.Departure_Date.Should().Be("2023-07-01");
             }
         }
 
@@ -99,26 +119,32 @@ namespace OTBHolidaySearch1.HolidaySearchTests
         {
             // Read a single json record from hotels datafile and deserialize. Test for expected contents ...
 
+            // Act ...
+            
             var json = File.ReadAllText(filePathHotels);
+
+            // Assert ..
 
             json.Should().NotBeNull();
             json.Should().BeOfType<string>();
 
             // because deserializer has trouble parsing [ and ] in Json values ...
 
+            // Arrange
+
             var newjson = json.Replace(" [", " ");
             var newjson2 = newjson.Replace("],",",");
             Console.WriteLine("newjson {0}", newjson2);
 
+            // Act ...
+
             var result = JsonConvert.DeserializeObject<List<Hotel>>(newjson2);
+
+            // Assert ...
 
             result.Should().NotBeNull();
             result.Should().BeOfType<List<Hotel>>();
             result!.Count.Should().Be(1);
-
-            Console.WriteLine("result = {0} ", result);
-
-            Console.WriteLine("result = {0} ", result!.Count);
             
             foreach (var item in result)
             {
